@@ -57,34 +57,56 @@ first and adjust `ZOOM` afterwards.
 
 ## Optional: the 3D voxel mod
 
-The 3D renderer is a separate, third-party mod by
-[DramaticShape](https://github.com/DramaticShape/DramaticShapeVoxelMod). It is
-**not bundled here** — it carries no license, so this repository can't
-redistribute it. You download it from its author directly.
+The 3D renderer is a separate, third-party mod by DramaticShape. It is **not
+bundled here** — it carries no license, so this repository can't redistribute
+it. Get it from the author:
 
-⚠️ **On iPhone and iPad, the mod's current release renders nothing.** It
-doesn't pin the DPI scale on its own render targets, so on a high-DPI screen
-3D mode turns on and silently draws an empty frame. The fix is submitted
-upstream as [PR #40](https://github.com/DramaticShape/DramaticShapeVoxelMod/pull/40)
-but hasn't been merged yet.
+> ### 📦 [github.com/DramaticShape/DramaticShapeVoxelMod](https://github.com/DramaticShape/DramaticShapeVoxelMod)
+> **[→ Download the latest release](https://github.com/DramaticShape/DramaticShapeVoxelMod/releases/latest)**
 
-Until it is, `add-mod.sh` fetches the author's official release and applies
-that patch locally:
+⚠️ **Read this before you install it on an iPhone or iPad.** The mod's current
+release renders nothing on a high-DPI screen — which every iPhone and iPad
+has. It doesn't pin the DPI scale on its own render targets, so 3D mode turns
+on and silently draws an empty frame. It isn't broken on your end and there is
+no setting that fixes it.
+
+The fix is submitted to the author as
+[PR #40](https://github.com/DramaticShape/DramaticShapeVoxelMod/pull/40) and
+hasn't been merged yet. Until it is, you need a computer once, to apply it.
+
+### With a computer (works today)
+
+On a Mac or Linux machine:
 
 ```bash
+git clone https://github.com/hernan0078/voxeltrail-ios.git
+cd voxeltrail-ios
 ./add-mod.sh
 ```
 
-It writes `DRAMATIC_SHAPE-ios.zip`. Move that to your device (AirDrop, iCloud
-Drive, or the Files app), then in VoxelTrail tap **Import Mod** and select it.
-Force-quit and reopen afterwards, same as for a ROM.
+It writes `DRAMATIC_SHAPE-ios.zip`. Get that onto your device however you like
+— AirDrop, iCloud Drive, emailing it to yourself — then install it with either
+route below.
 
-The script downloads the mod from its own GitHub release and applies only the
-lines added by PR #40 — which are our contribution, not the author's work.
-Nothing of the mod is redistributed here.
+The script downloads the mod from the author's own release and applies only
+the lines PR #40 adds, which are our contribution rather than the author's
+work. Nothing of the mod is redistributed here. It also checks first: if a
+later release already contains the fix, it says so and stops.
 
-Once PR #40 is merged, the script becomes unnecessary: install the mod
-normally and skip all of this.
+### From the phone alone (once PR #40 merges)
+
+No computer needed — the app can take a `.zip` straight from Files:
+
+1. Download the mod's release zip in Safari; it lands in **Files → Downloads**.
+2. In VoxelTrail, open the **MODS** tab and choose the mod import button.
+3. Pick the zip. Or skip the picker entirely: in Files, move the zip into the
+   **VoxelTrail** folder under *On My iPhone*, and the app picks it up on next
+   launch.
+4. Force-quit and reopen. (Required either way — see *Known issues*.)
+
+Both routes work right now, mechanically. What you get **today** is the
+unpatched mod, so 3D mode will be blank. Once PR #40 is merged this becomes
+the whole story and `add-mod.sh` can be ignored.
 
 ## Known issues
 
