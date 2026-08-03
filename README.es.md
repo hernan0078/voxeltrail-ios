@@ -110,7 +110,7 @@ que sujetar el mando normal nunca cambia el zoom sin querer.
 
 ### Español
 
-**`IDIOMA` → `ESPA~OL`** pasa a español todos los ajustes de la app: tanto las
+**`IDIOMA` → `ESPANOL`** pasa a español todos los ajustes de la app: tanto las
 filas de este mod como las del propio motor (`ZOOM`, `VEL TEXTO`,
 `RELLENO VACIO`, `ESTILO COMBATE`…).
 
@@ -118,9 +118,9 @@ El texto del juego —nombres, diálogos, objetos, lugares— se queda como est�
 tu ROM, porque ese texto es del cartucho. Una ROM en inglés sigue siendo una
 aventura en inglés, con los menús en español.
 
-> Nota sobre la tilde: la fuente del juego no tiene glifo para la ñ ni para
-> las vocales acentuadas, así que se escribe `~` donde haría falta una eñe.
-> Es una limitación de la fuente, no una errata.
+> Nota: la fuente del juego no tiene glifo para la ñ ni para las vocales
+> acentuadas, así que el español de los menús va en A-Z sin tildes
+> (ESPANOL, DISENO). Es una limitación de la fuente, no una errata.
 
 ### Controles táctiles
 

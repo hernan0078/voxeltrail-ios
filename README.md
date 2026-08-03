@@ -106,7 +106,7 @@ so holding the game normally never zooms it by accident.
 
 ### Spanish
 
-**`LANGUAGE` → `ESPA~OL`** switches every setting in the app to Spanish —
+**`LANGUAGE` → `ESPANOL`** switches every setting in the app to Spanish —
 both this mod's rows and the engine's own (`ZOOM`, `VEL TEXTO`,
 `RELLENO VACIO`, `ESTILO COMBATE`…).
 
