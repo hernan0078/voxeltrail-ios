@@ -127,6 +127,9 @@ cada juego, las ranuras de partida, el explorador de mods y las opciones. Si
 tu telefono esta en español, arranca asi; si no, el boton junto a
 **Controles** en el menu inicial lo cambia y lo recuerda.
 
+Quieres Amarillo en español? Mira **[SPANISH-YELLOW.md](SPANISH-YELLOW.md)**:
+se puede, pero no por donde parece.
+
 **Las ROMs de Rojo y Azul en español funcionan**, gracias a
 [gen1recomp PR #622](https://github.com/bryanthaboi/gen1recomp/pull/622) de
 jherediagu. Importa *Edición Roja* o *Edición Azul* y el juego se juega en

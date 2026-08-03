@@ -126,6 +126,9 @@ The game's own text — names, dialogue, items, places — stays as it is in you
 ROM, because that text belongs to the cartridge. An English ROM stays an
 English adventure with Spanish menus.
 
+Want Yellow in Spanish? See **[SPANISH-YELLOW.md](SPANISH-YELLOW.md)** — it
+is possible, and not the way you would expect.
+
 **Spanish Red and Blue ROMs are supported**, thanks to
 [gen1recomp PR #622](https://github.com/bryanthaboi/gen1recomp/pull/622) by
 jherediagu. Import *Edición Roja* or *Edición Azul* and the game itself plays
