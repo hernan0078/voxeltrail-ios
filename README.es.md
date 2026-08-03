@@ -22,7 +22,7 @@ sideload: lo firman con tu propio Apple ID, en tu propio dispositivo.
 1. **Instala un sideloader.** [SideStore](https://sidestore.io) o
    [AltStore](https://altstore.io). Sigue su configuración; ambos necesitan
    emparejarse una vez con un ordenador.
-2. **Descarga** `VoxelTrail-0.2.1.ipa` desde la
+2. **Descarga** `VoxelTrail-0.3.0.ipa` desde la
    [última versión](../../releases/latest). En el teléfono, Safari lo deja en
    **Archivos → Descargas**.
 3. **Ábrelo con SideStore/AltStore** y deja que lo instale. La primera
@@ -31,7 +31,7 @@ sideload: lo firman con tu propio Apple ID, en tu propio dispositivo.
    VPN y gestión de dispositivos**, toca tu Apple ID y **Confiar**.
 5. Abre **VoxelTrail** desde la pantalla de inicio.
 
-Requiere **iOS 16 o posterior**. Con un Apple ID gratuito, una app instalada
+Requiere **iOS 16 o posterior**. Probado en iPhone con iOS 26.6. Con un Apple ID gratuito, una app instalada
 así funciona **7 días** antes de tener que renovarla desde el sideloader: es
 un límite de Apple, no de la app. Una cuenta de desarrollador de pago lo
 amplía a un año.
@@ -73,6 +73,7 @@ Todo lo de abajo va dentro del IPA. No hay que instalar nada aparte.
 | `LEVE` · `INCLINADO` · `EMPINADO` | Ángulos de diorama cada vez más inclinados |
 | `CENITAL` | Casi desde arriba, como un juego de mesa |
 | `1A PERSONA` | Dentro del mundo, a la altura de los ojos |
+| `3A PERSONA` | Detras de tu personaje, siguiendote al andar |
 
 `3D TOTAL` es un **preajuste**, no un ángulo: cambia las demás filas por ti,
 así que elige primero el ángulo y ajusta el resto después.
@@ -90,6 +91,17 @@ En el nivel `1A PERSONA`:
 Tres filas aparecen solo en este nivel: `PALANCA` (ocúltala si juegas con
 mando), `VELOCIDAD` e `INVERTIR Y` para quien prefiere tirar hacia abajo para
 mirar hacia arriba.
+
+### Tercera persona
+
+`MUNDO 3D → 3A PERSONA` pone la camara detras de tu personaje. Ves a Red
+mientras andas, se gira hacia donde camina, y la camara baja cuando miras
+hacia abajo.
+
+Dos filas aparecen en este nivel: `DISTANCIA` —a que distancia queda la
+camara— y `ALTURA CAM` —a que altura va—. Las dos estan en el panel de
+ajuste en vivo, que es donde tiene sentido tocarlas: cambia `DISTANCIA` y
+mira como se aleja la camara.
 
 ### Ajuste en vivo: cambia el aspecto mientras lo miras
 
@@ -110,9 +122,18 @@ que sujetar el mando normal nunca cambia el zoom sin querer.
 
 ### Español
 
-**`IDIOMA` → `ESPANOL`** pasa a español todos los ajustes de la app: tanto las
-filas de este mod como las del propio motor (`ZOOM`, `VEL TEXTO`,
-`RELLENO VACIO`, `ESTILO COMBATE`…).
+**Toda la app**, no solo la lista de ajustes: el menu inicial, las fichas de
+cada juego, las ranuras de partida, el explorador de mods y las opciones. Si
+tu telefono esta en español, arranca asi; si no, el boton junto a
+**Controles** en el menu inicial lo cambia y lo recuerda.
+
+**Las ROMs de Rojo y Azul en español funcionan**, gracias a
+[gen1recomp PR #622](https://github.com/bryanthaboi/gen1recomp/pull/622) de
+jherediagu. Importa *Edición Roja* o *Edición Azul* y el juego se juega en
+español, compartiendo pestaña, cache y partidas con su version de EEUU.
+*Amarillo* en español no se puede: no existe una desensambladura que resuelva
+sus direcciones, y el menu lo dice en vez de dar a entender que la ROM esta
+mal.
 
 El texto del juego —nombres, diálogos, objetos, lugares— se queda como esté en
 tu ROM, porque ese texto es del cartucho. Una ROM en inglés sigue siendo una

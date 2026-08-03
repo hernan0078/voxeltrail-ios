@@ -20,7 +20,7 @@ with your own Apple ID, on your own device.
 1. **Install a sideloader.** [SideStore](https://sidestore.io) or
    [AltStore](https://altstore.io). Follow their setup; both need a one-time
    pairing step with a computer.
-2. **Download** `VoxelTrail-0.2.1.ipa` from the
+2. **Download** `VoxelTrail-0.3.0.ipa` from the
    [latest release](../../releases/latest). On the phone, Safari puts it in
    **Files → Downloads**.
 3. **Open it in SideStore/AltStore** and let it install. First install takes a
@@ -29,7 +29,7 @@ with your own Apple ID, on your own device.
    Management**, tap your Apple ID, **Trust**.
 5. Launch **VoxelTrail** from the home screen.
 
-Requires **iOS 16 or later**. On a free Apple ID a sideloaded app runs for
+Requires **iOS 16 or later**. Tested on iPhone running iOS 26.6. On a free Apple ID a sideloaded app runs for
 **7 days** before it needs refreshing in the sideloader — an Apple limit, not
 this app's. A paid developer account extends it to a year.
 
@@ -70,6 +70,7 @@ Everything below is in the IPA — nothing to install separately.
 | `SLIGHT` · `TILTED` · `STEEP` | Progressively steeper diorama angles |
 | `TABLE TOP` | Nearly straight down, like a board game |
 | `1ST PERSON` | Inside the world, at eye level |
+| `3RD PERSON` | Behind your character, following as you walk |
 
 `FULL 3D` is a **preset**, not an angle — it sets the other rows for you, so
 pick your angle first and fine-tune afterwards.
@@ -86,6 +87,16 @@ On the `1ST PERSON` rung:
 Three rows appear on this rung only: `LOOK STICK` (hide it if you play with a
 controller), `LOOK SPEED`, and `INVERT Y` for anyone who flies
 pull-back-to-look-up.
+
+### Third person
+
+`3D WORLD → 3RD PERSON` puts the camera behind your character. You see Red as
+you walk, he turns to face the direction he's travelling, and the camera
+swings low when you look down.
+
+Two rows appear on this rung: `DISTANCE` — how far back the camera sits — and
+`CAM HEIGHT` — how high it rides. Both are in the live-tuning panel, which is
+the sane place to set them: step `DISTANCE` and watch the camera pull back.
 
 ### Live tuning — change the look while you watch it
 
@@ -106,13 +117,21 @@ so holding the game normally never zooms it by accident.
 
 ### Spanish
 
-**`LANGUAGE` → `ESPANOL`** switches every setting in the app to Spanish —
-both this mod's rows and the engine's own (`ZOOM`, `VEL TEXTO`,
-`RELLENO VACIO`, `ESTILO COMBATE`…).
+**The whole app**, not just the settings list — the launcher, the game cards,
+the save slots, the mod browser and the options menu. If your phone is set to
+Spanish it opens that way; otherwise the button beside **Touch Controls** in
+the launcher switches it, and remembers.
 
 The game's own text — names, dialogue, items, places — stays as it is in your
 ROM, because that text belongs to the cartridge. An English ROM stays an
 English adventure with Spanish menus.
+
+**Spanish Red and Blue ROMs are supported**, thanks to
+[gen1recomp PR #622](https://github.com/bryanthaboi/gen1recomp/pull/622) by
+jherediagu. Import *Edición Roja* or *Edición Azul* and the game itself plays
+in Spanish, sharing a tab, cache and saves with its US counterpart. Spanish
+**Yellow** cannot be supported — no disassembly exists to resolve its symbol
+addresses — and the launcher says so rather than implying the ROM is bad.
 
 ### Touch controls
 
