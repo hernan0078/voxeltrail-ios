@@ -20,7 +20,7 @@ with your own Apple ID, on your own device.
 1. **Install a sideloader.** [SideStore](https://sidestore.io) or
    [AltStore](https://altstore.io). Follow their setup; both need a one-time
    pairing step with a computer.
-2. **Download** `VoxelTrail-0.2.0.ipa` from the
+2. **Download** `VoxelTrail-0.2.1.ipa` from the
    [latest release](../../releases/latest). On the phone, Safari puts it in
    **Files → Downloads**.
 3. **Open it in SideStore/AltStore** and let it install. First install takes a
@@ -50,6 +50,14 @@ the extracted data lives in the app's private storage.
 ## What's in this build
 
 Everything below is in the IPA — nothing to install separately.
+
+> **Tested against Dramatic Shape v1.5.4.** That exact version is what ships
+> inside this IPA and what every feature below was tested on. The mod is
+> updated often, and a newer release may change or break things here — the
+> live-tuning panel, the look stick and the Spanish labels are all built on
+> top of it. If you install a newer version yourself through **Import Mod**,
+> it will override the bundled one and you are past what has been verified.
+> Wait for a release of this app that names the newer version.
 
 ### The 3D world
 
