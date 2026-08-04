@@ -2,39 +2,41 @@
 
 **[Español abajo](#en-español)**
 
-There are two ways to play Yellow in Spanish, and they are not equally
-difficult. This is a handoff for anyone who wants to do the work — including
-future me.
+A Spanish **Edición Amarilla** cartridge now imports and plays. This document
+was originally a handoff saying that was weeks of specialist work away; it was
+wrong, and what follows is why, and what is actually left.
 
 ---
 
 ## The short version
 
-**Do the translation mod.** It works on the English ROM people already own,
-the tooling exists, and it can be started this afternoon by one person and
-finished by several.
+**A Spanish cartridge imports.** Drop an *Edición Amarilla* dump into the
+launcher and it extracts and runs in Spanish — the dialogue, the Pokédex, the
+move and item names, `ñ` and `á` and `¿` and all — because the addresses it
+needs are recovered from the cartridge itself rather than from a disassembly
+that does not exist — all 4,711 of them.
 
-**Do not start with the disassembly** unless you specifically want to
-reverse-engineer a ROM. It is the only path that makes a Spanish *cartridge*
-importable, and it is weeks of specialist work.
+**A translation mod is still worth doing**, for a different reason: it works
+on the English ROM people already own, and it is the only route for languages
+that never had a retail cartridge.
+
+The two paths no longer compete. Cartridge support is done; the mod route is
+for people who do not have a Spanish cart.
 
 ---
 
-## Path A — a translation mod (recommended)
+## Path A — a translation mod
 
-The engine already has a translation system, and the project's maintainer has
-said mods are the intended route. A translation mod replaces the game's text
-at runtime, so it works with the **English Yellow ROM you already have**. No
-Spanish cartridge, no disassembly.
-
-### What you get for free
+Unchanged and still good. The engine has a translation system and the
+maintainer has said mods are the intended route. A translation mod replaces
+text at runtime, so it works with the **English Yellow ROM**.
 
 ```bash
 python3 tools/modkit.py translation spanish_yellow --language "Espanol"
 ```
 
-That scaffolds a complete mod: a manifest, a `lang/` directory with one
-catalog per kind of text, and a `TRANSLATING.md` explaining the workflow.
+That scaffolds a manifest, a `lang/` directory with one catalog per kind of
+text, and a `TRANSLATING.md`.
 
 | Catalog | What it holds | Keyed by |
 |---|---|---|
@@ -45,63 +47,36 @@ catalog per kind of text, and a `TRANSLATING.md` explaining the workflow.
 | `naming.lua` | The letter grid for entering names | — |
 | `font.lua` · `charmap.lua` | Your glyph sheet and what draws what | — |
 
-**Fill in a value and it takes effect. Leave it `""` and that string stays
-English.** The game is playable at every point along the way, which means the
-work can be done in slices and released early.
+Fill in a value and it takes effect. Leave it `""` and that string stays
+English, so the work ships in slices.
 
-### The accent problem is solvable
+### The accent problem is solved twice over
 
-This matters, and it is the thing I got wrong in the app's own menus.
+The Game Boy font has no glyph for `ñ` or any accented vowel — the charmap's
+one exception is the small `é` of POKéMON. Our app menus are written in plain
+A–Z for that reason, which reads as slightly wrong Spanish.
 
-The Game Boy font has **no glyph for `ñ` or any accented vowel** — the entire
-charmap's one exception is the small `é` of POKéMON. Our menu Spanish is
-written in plain A–Z for that reason, which reads as slightly wrong Spanish.
+A mod can ship its own glyph sheet (`assets/font/`, `lang/font.lua`,
+`lang/charmap.lua`) and draw the missing eight. That is an afternoon of pixel
+work.
 
-A translation mod does **not** have to accept that. It can ship its own glyph
-sheet:
-
-- `assets/font/` — a PNG of 8×8 cells, black on white, 16 per row
-- `lang/font.lua` — declares the sheet and its base code
-- `lang/charmap.lua` — maps byte sequences to glyph codes, longest-first, so
-  multi-byte characters and ligatures both work
-
-`assets/generated/font.png` in the player's cache is the vanilla sheet at the
-same scale — open it alongside yours to match weight and baseline.
-
-So a proper Spanish translation can have `ñ`, `á`, `í`, `ó`, `ú`, `¿` and `¡`.
-Drawing about eight glyphs is an afternoon's pixel work and it lifts the whole
-thing from "readable" to "right".
-
-### The actual workflow
-
-1. **Import a Yellow ROM in the app first.** Without one, the scaffold falls
-   back to a three-species test fixture — you will get 577 engine strings and
-   almost no dialogue.
-2. **Re-run with `--refresh`** to harvest the real catalogs from your imported
-   data.
-3. **Translate.** The English lives in a `spanish_yellow-worksheet/`
-   directory *outside* the mod, one tab-separated file per catalog:
-   ```
-   "_AbandonLearningText"	"Abandon learning\n{RAM:wStringBuffer}?"
-   ```
-4. **Keep the worksheet outside the mod.** This is deliberate and it matters
-   legally: extracted script text is ROM content, and `modkit pack` zips
-   everything under the mod directory. A worksheet kept inside would ship the
-   original English script in your release. Yours holds only your
-   translations.
-5. **Pack and test** with `modkit`, then import the zip in the app.
+**And the retail cartridge already did it.** Nintendo's Spanish build reused
+the Japanese kana slots `$C0`–`$DF` for `à á è é ì í ò ó ù ú ä ö ü ñ` and
+their capitals, and two apostrophe-ligature slots for `¿` and `¡`. If you
+want a reference glyph sheet that is guaranteed to fit the font's weight and
+baseline, it is sitting in the cartridge — `tools/es/charmap.py --render`
+prints every one of them as ASCII art.
 
 ### Scale, honestly
 
 The engine catalog is **577 strings** — menus, battle messages, link play.
 That is a weekend.
 
-The dialogue catalog is the large one. For Red/Blue the extractor decodes
-**2,585 dialogue labels**; Yellow is comparable. That is the part that wants
-several people, or one person and patience.
+The dialogue catalog is the large one: **2,585 labels** for Red/Blue, and
+Yellow is comparable. That wants several people, or one person and patience.
 
 Placeholders like `%s`, `\n` and `{RAM:wStringBuffer}` must survive
-translation exactly — the engine checks format arity and falls back to English
+translation exactly. The engine checks format arity and falls back to English
 with a warning rather than crashing, but a mismatch means that line never
 shows in Spanish.
 
@@ -110,76 +85,135 @@ shows in Spanish.
 There is reportedly **already a Spanish translation mod** for this engine —
 bryanthaboi mentioned one on
 [issue #729](https://github.com/bryanthaboi/gen1recomp/issues/729). Find it
-before starting. If it covers Red/Blue only, its `strings.lua` still transfers
-wholesale to Yellow, since engine text is shared. That alone could halve the
-work.
+before starting. If it covers Red/Blue only, its `strings.lua` still
+transfers wholesale to Yellow, since engine text is shared.
 
 ---
 
-## Path B — Spanish ROM support (the hard one)
+## Path B — Spanish ROM support
 
-This is what [PR #622](https://github.com/bryanthaboi/gen1recomp/pull/622)
-did for Red and Blue: import a genuine *Edición Roja* cartridge dump and the
-game plays in Spanish from the ROM itself.
+**This works now.** `tools/es/` builds an import manifest for a translated
+cartridge by reading it against the English one.
 
-It cannot be done for Yellow today, and the reason is specific.
+```bash
+python3 tools/es/make_es_manifest.py \
+    --base "Pokemon - Yellow Version.gbc" \
+    --target "Pokemon - Edicion Amarilla.gb" \
+    --manifest tools/rom_manifest_yellow.json \
+    --out tools/rom_manifest_yellow_es.json
+```
 
-### Why it is blocked
+`GameVersion` gained a `yellow_es` entry, so the launcher shows an
+**Amarilla (ES)** column and the cart imports like any other.
 
-The extractor resolves ~3,269 symbols through a manifest of
-`name → [bank, address]` pairs. For the Spanish releases those addresses come
-from [einstein95/pokered-es](https://github.com/einstein95/pokered-es), a
-**shift-matching disassembly** — one that rebuilds the retail ROM
-byte-for-byte, so its `.sym` output gives the Spanish address of every symbol.
+### Why the old answer was wrong
 
-**No equivalent exists for Spanish Yellow.** Without it there are no
-addresses, and they cannot be guessed: a wrong address produces a garbled
-game, not a Spanish one.
+The extractor resolves ~4,459 symbols through `name -> [bank, address]`
+pairs. For the English games those come from a pret disassembly's `.sym`
+output. For Spanish Red/Blue,
+[PR #622](https://github.com/bryanthaboi/gen1recomp/pull/622) used
+[einstein95/pokered-es](https://github.com/einstein95/pokered-es), a
+shift-matching disassembly that rebuilds the retail ROM byte for byte.
 
-### It is demonstrably possible
+No such disassembly exists for Spanish Yellow, and the conclusion drawn from
+that was: no addresses, and they cannot be guessed.
 
-Yellow disassemblies exist for other European releases:
+The second half is true and the first half does not follow. **The addresses
+do not have to be guessed, because the cartridge states them.**
 
-- [`Narishma-gb/pokeyellow-fr`](https://github.com/Narishma-gb/pokeyellow-fr) — French
-- [`Brianum/pokeyellow-de`](https://github.com/Brianum/pokeyellow-de) — German
-- [`Narishma-gb/pokeyellow-jp`](https://github.com/Narishma-gb/pokeyellow-jp) — Japanese
+A translated cartridge is not a rewrite. Every routine, every graphics blob
+and every fixed-size table is byte-identical; what changes is the text, and
+everything after a longer or shorter string slides. The Spanish and English
+Yellow ROMs are **72% byte-identical**, and 32 of their 62 used banks sit at
+exactly the same offsets.
 
-So pret's Yellow has been adapted to European builds twice. Spanish simply has
-not been done.
+That is enough to line the two up bank by bank. And once they are lined up,
+the pointers inside the Spanish ROM can simply be read:
 
-### What it would take
+- Gen-1 dialogue is reached through `text_far` — the byte `$17`, then an
+  address, then a bank. The `$17` is untouched code, so it relocates by
+  alignment, and **the pointer sitting right behind it is the cartridge
+  telling you where it moved its own text.** That recovers 2,482 dialogue
+  labels whose content is completely different.
+- Pokédex descriptions are read out of their own entry blocks, 149 of them.
+- Runs of dialogue are walked block by block between two labels already
+  placed, accepted only when the walk closes exactly on the label that ends
+  the run -- which is what corrects a mislocated pointer.
+- Map headers come from their pointer table and its parallel bank table, 101
+  of them, found exactly because we know every entry the English ROM holds.
+- 914 symbols never moved at all.
 
-1. Fork [`pret/pokeyellow`](https://github.com/pret/pokeyellow) and get it
-   building with `rgbds`.
-2. Diff the build against a Spanish Amarillo dump.
-   [gbromdiff](https://github.com/hernan0078/gbromdiff) exists for this — it
-   reports bank by bank whether a difference is *replaced* (translated text
-   needing new source) or *patched* (the same code with pointers moved), which
-   are completely different jobs.
-3. Replace the script, fix the shifted tables, rebuild, diff again. Repeat
-   until identical.
-4. Run `tools/make_es_manifest.py` against the resulting `.sym` — at that
-   point the existing machinery does the rest.
+Nothing is guessed. Every address is either read out of the Spanish ROM's own
+pointers or carried across a byte-identical run, and every one is
+range-checked, order-checked and cross-checked against the other strategies
+before it ships. What cannot be established is listed, not invented.
 
-Steps 1 and 4 are an afternoon. Steps 2 and 3 are the project.
+### What to be careful about
 
-### If someone does it
+Every symbol resolves, and every check agrees with the English baseline: text
+addresses sit just after a string terminator at 99.59% against English's
+99.66%, the block chain reconciles all but 10 consecutive pairs against
+English's own 10, and no two symbols share a destination.
 
-The payoff is real: a Spanish Yellow cartridge would import and play with no
-mod at all, and the same technique would open French, German and Italian.
-[einstein95](https://github.com/einstein95) is the most likely person to
-already have notes — asking costs nothing.
+But more than half the addresses come from reading a relocated `text_far`,
+and **only 44 of those 2,694 sites sit inside a byte-identical run** — the
+rest are interpolated. A wrapper is five bytes, so an interpolated site can
+land next door and read a valid pointer to the neighbouring label's text.
+Nine labels around `_CantDepositLastMonText` did exactly that, each shifted
+by one block, and no range, order or plausibility check noticed, because
+every individual answer was well-formed. They were found by reading the
+Spanish against the English, and are fixed.
+
+So the manifest is very good and not proven. If you play through and a line
+looks like it belongs to the wrong character, that is the failure mode, and
+it is worth reporting.
+
+A shift-matching `pokeyellow-es` would settle it for good. It is no longer on
+the critical path, but it is the only thing that would turn "every check
+passes" into "proven".
+
+
+### One real format difference
+
+European cartridges store Pokédex height and weight in **metric** — one byte
+of decimetres and two of hectograms — where the US ones use four bytes of
+feet, inches and tenths of a pound. Both extractors now detect which layout
+they are reading, keep the metric figures, and convert for the imperial
+fields.
+
+Two things about that are worth knowing before attempting French, German or
+Italian. The layout has to be decided for the whole table rather than per
+entry — the marker is the `text_far` after the measurements, and TENTACOOL's
+Spanish entry reads `$09 $C7 $01 $17 $17`, so on its own it looks imperial
+and comes out as 199 inches tall. And the conversion is not exact: heights
+match the US cartridge for all 151 species, but weights match for only 21 and
+otherwise sit within 0.6 lb, because Nintendo wrote the two sets of figures
+independently. Pikachu is 0.4 m / 6.0 kg in Spanish, which converts to 13.2
+lb where the US cart says 13.0.
+
+### Other languages
+
+Nothing in `tools/es/` is Spanish-specific. French, German and Italian Yellow
+should work the same way, and Red/Blue in any language by pointing
+`--manifest` at `tools/rom_manifest.json`. Which font slots a build reused is
+derived from whichever ROM you hand it.
+
+If you have a European cartridge dump, running the tool and posting its
+report is a useful contribution on its own — it says exactly how far the
+method gets on that language without anyone having to guess.
 
 ---
 
 ## Recommendation
 
-Do Path A. Ask about the existing Spanish mod first, lift its `strings.lua`,
-draw the eight missing glyphs, and split the dialogue between whoever
-volunteers. A partial translation ships and is useful on day one.
+If you have a Spanish cartridge: import it.
 
-Leave Path B for someone who finds the reverse-engineering fun. It is not on
-the critical path to a Spanish Yellow.
+If you do not, do Path A. Ask about the existing Spanish mod first, lift its
+`strings.lua`, and use `tools/es/charmap.py --render` against a Spanish cart
+as your reference for the eight missing glyphs.
+
+If you enjoy reverse-engineering, `pokeyellow-es` is still worth building —
+but as the thing that proves the result, not as the thing that unblocks it.
 
 ---
 
@@ -187,74 +221,168 @@ the critical path to a Spanish Yellow.
 
 ## Resumen
 
-Hay dos caminos para jugar a Amarillo en español, y no cuestan lo mismo.
+**Un cartucho de Edición Amarilla ya se importa y funciona.** Este documento
+decía antes que eso eran semanas de trabajo especializado; estaba
+equivocado. Las direcciones que necesita el extractor se recuperan del propio
+cartucho en vez de una desensambladura que no existe: los 4.711.
 
-**Haz el mod de traducción.** Funciona con la ROM en inglés que ya tienes, las
-herramientas existen, y se puede empezar hoy.
-
-**No empieces por la desensambladura** salvo que te apetezca hacer ingeniería
-inversa. Es el único camino que permite importar un cartucho español, y son
-semanas de trabajo especializado.
+El **mod de traducción** sigue mereciendo la pena por otra razón: funciona con
+la ROM en inglés que ya tienes, y es la única vía para idiomas que nunca
+tuvieron cartucho.
 
 ## Camino A — un mod de traducción
 
-El motor ya trae un sistema de traducción, y el autor del proyecto ha dicho
+El motor ya trae un sistema de traducción y el autor del proyecto ha dicho
 que los mods son la vía prevista. Un mod sustituye el texto en tiempo de
-ejecución, así que **vale con la ROM en inglés**: ni cartucho español ni
-desensambladura.
+ejecución, así que vale con la ROM en inglés.
 
 ```bash
 python3 tools/modkit.py translation spanish_yellow --language "Espanol"
 ```
 
 Eso genera el mod entero: manifiesto, un catálogo por tipo de texto en
-`lang/`, y un `TRANSLATING.md` con el procedimiento. Rellenas un valor y
-funciona; lo que dejes vacío se queda en inglés, así que el juego es jugable
-en cualquier punto del camino.
+`lang/`, y un `TRANSLATING.md`. Rellenas un valor y funciona; lo que dejes
+vacío se queda en inglés, así que el juego es jugable en cualquier punto.
 
 **Las tildes sí se pueden.** La fuente del juego no tiene glifo para la ñ ni
 para las vocales acentuadas —por eso el español de nuestros menús va sin
-tildes— pero un mod **puede traer su propia hoja de glifos**
-(`assets/font/`, `lang/font.lua`, `lang/charmap.lua`). Dibujar unos ocho
-glifos es una tarde y sube el resultado de "legible" a "correcto".
+tildes— pero un mod puede traer su propia hoja de glifos (`assets/font/`,
+`lang/font.lua`, `lang/charmap.lua`).
 
-**Procedimiento:** importa una ROM de Amarillo primero (sin ella el andamiaje
-usa un fixture de tres especies), vuelve a lanzar con `--refresh` para
-extraer los catálogos reales, y traduce contra el `-worksheet/` que queda
-**fuera** del mod —eso es deliberado: el guión extraído es contenido de la
-ROM, y así tu mod solo contiene tus traducciones.
+Y el cartucho español ya lo resolvió: Nintendo reutilizó los huecos de los
+kana japoneses (`$C0`–`$DF`) para `à á è é ì í ò ó ù ú ä ö ü ñ` y sus
+mayúsculas, y dos huecos de ligaduras para `¿` y `¡`.
+`tools/es/charmap.py --render` los imprime todos como arte ASCII, que es la
+mejor referencia posible de peso y línea base.
 
 **Tamaño real:** 577 cadenas del motor (un fin de semana) y unas 2.585
 etiquetas de diálogo (eso quiere varias personas). Los `%s`, `\n` y
 `{RAM:...}` tienen que sobrevivir intactos.
 
-**Antes de empezar:** al parecer **ya existe un mod en español** para este
-motor; bryanthaboi lo mencionó en la
+**Antes de empezar:** al parecer ya existe un mod en español para este motor;
+bryanthaboi lo mencionó en la
 [issue #729](https://github.com/bryanthaboi/gen1recomp/issues/729). Búscalo.
-Aunque solo cubra Rojo/Azul, su `strings.lua` sirve igual para Amarillo,
-porque el texto del motor es común.
+Aunque solo cubra Rojo/Azul, su `strings.lua` sirve igual para Amarillo.
 
 ## Camino B — soporte de ROM española
 
-Es lo que hizo [PR #622](https://github.com/bryanthaboi/gen1recomp/pull/622)
-con Rojo y Azul. Para Amarillo está bloqueado: el extractor resuelve ~3.269
-símbolos con direcciones que salen de una desensambladura que reconstruye la
-ROM byte a byte, y **no existe una para Amarillo en español**. Las direcciones
-no se pueden adivinar: una mal puesta da un juego corrupto, no uno traducido.
+**Ya funciona.** `tools/es/` construye el manifiesto de importación de un
+cartucho traducido leyéndolo contra el inglés.
 
-Sí es posible —existen desensambladuras de Amarillo en francés
-([pokeyellow-fr](https://github.com/Narishma-gb/pokeyellow-fr)) y alemán
-([pokeyellow-de](https://github.com/Brianum/pokeyellow-de))— pero es el
-proyecto entero, no un paso.
+```bash
+python3 tools/es/make_es_manifest.py \
+    --base "Pokemon - Yellow Version.gbc" \
+    --target "Pokemon - Edicion Amarilla.gb" \
+    --manifest tools/rom_manifest_yellow.json \
+    --out tools/rom_manifest_yellow_es.json
+```
 
-Si alguien se anima:
-[gbromdiff](https://github.com/hernan0078/gbromdiff) sirve para el bucle de
-compilar, comparar y corregir, y
-[einstein95](https://github.com/einstein95) es quien más probablemente tenga
-notas.
+`GameVersion` tiene ahora una entrada `yellow_es`, así que el lanzador
+muestra una columna **Amarilla (ES)** y el cartucho se importa como
+cualquier otro.
+
+### Por qué la respuesta anterior era falsa
+
+El extractor resuelve ~4.459 símbolos con pares `nombre -> [banco,
+dirección]`. Para los juegos en inglés salen del `.sym` de una
+desensambladura de pret; para Rojo/Azul en español, la
+[PR #622](https://github.com/bryanthaboi/gen1recomp/pull/622) usó
+[einstein95/pokered-es](https://github.com/einstein95/pokered-es).
+
+Para Amarillo en español no existe ninguna, y de ahí se concluyó: sin
+direcciones, y no se pueden adivinar.
+
+Lo segundo es cierto y lo primero no se sigue. **No hay que adivinarlas,
+porque el cartucho las dice.**
+
+Un cartucho traducido no es una reescritura: las rutinas, los gráficos y las
+tablas de tamaño fijo son idénticas byte a byte; lo que cambia es el texto, y
+todo lo que va detrás de una cadena más larga o más corta se desplaza. Las
+ROMs española e inglesa de Amarillo son **idénticas en un 72%**, y 32 de sus
+62 bancos usados están exactamente en los mismos desplazamientos.
+
+Con eso se pueden alinear banco a banco. Y una vez alineadas, los punteros de
+la ROM española se leen sin más:
+
+- El diálogo de la primera generación se alcanza con `text_far`: el byte
+  `$17`, luego una dirección, luego un banco. El `$17` es código intacto, así
+  que se reubica por alineación, y **el puntero que va justo detrás es el
+  cartucho diciéndote dónde ha puesto su propio texto.** Eso recupera 2.482
+  etiquetas de diálogo cuyo contenido es completamente distinto.
+- Las descripciones de la Pokédex se leen de sus propios bloques: 149.
+- Los tramos de diálogo se recorren bloque a bloque entre dos etiquetas ya
+  colocadas, y solo se aceptan si el recorrido cierra exactamente en la
+  etiqueta que lo termina; eso es lo que corrige un puntero mal ubicado.
+- Las cabeceras de mapa salen de su tabla de punteros y de la tabla de bancos
+  paralela: 101, localizadas con exactitud porque conocemos todas las
+  entradas que tiene la ROM inglesa.
+- 914 símbolos no se movieron.
+
+Nada se adivina. Cada dirección se lee de los punteros de la propia ROM
+española o se arrastra por un tramo idéntico byte a byte, y todas se
+comprueban por rango, por orden y contra las demás estrategias antes de
+publicarse. Lo que no se puede establecer se lista, no se inventa.
+
+### Con qué hay que tener cuidado
+
+Todos los símbolos se resuelven, y todas las comprobaciones coinciden con la
+referencia inglesa: las direcciones de texto caen justo detrás de un
+terminador el 99,59% de las veces frente al 99,66% del inglés, la cadena de
+bloques encaja en todos los pares consecutivos menos 10 frente a los 10 del
+propio inglés, y ningún par de símbolos comparte destino.
+
+Pero más de la mitad de las direcciones salen de leer un `text_far`
+reubicado, y **solo 44 de esos 2.694 emplazamientos caen dentro de un tramo
+idéntico byte a byte**; el resto hay que interpolarlos. Un envoltorio ocupa
+cinco bytes, así que uno interpolado puede caer en el de al lado y leer un
+puntero válido al texto de la etiqueta vecina. Nueve etiquetas alrededor de
+`_CantDepositLastMonText` hicieron justo eso, desplazadas un bloque cada
+una, y ninguna comprobación de rango, orden o plausibilidad se dio cuenta,
+porque cada respuesta por separado estaba bien formada. Se encontraron
+leyendo el español contra el inglés, y están corregidas.
+
+Así que el manifiesto es muy bueno, no demostrado. Si juegas y una frase
+parece de otro personaje, ése es el fallo, y merece la pena avisar.
+
+Una `pokeyellow-es` con coincidencia byte a byte lo zanjaría. Ya no es el
+camino crítico, pero es lo único que convertiría "pasa todas las
+comprobaciones" en "demostrado".
+
+
+### Una diferencia real de formato
+
+Los cartuchos europeos guardan la altura y el peso de la Pokédex en
+**métrico** —un byte de decímetros y dos de hectogramos— donde los
+estadounidenses usan cuatro bytes de pies, pulgadas y décimas de libra. Los
+dos extractores detectan ahora qué formato están leyendo, conservan las
+cifras métricas y convierten para los campos imperiales.
+
+El formato hay que decidirlo para la tabla entera y no entrada por entrada:
+la señal es el `text_far` que va detrás de las medidas, y la entrada española
+de TENTACOOL es `$09 $C7 $01 $17 $17`, así que por sí sola parece imperial y
+sale midiendo 199 pulgadas. Y la conversión no es exacta: las alturas
+coinciden con el cartucho estadounidense en las 151 especies, pero los pesos
+solo en 21, y el resto se queda a menos de 0,6 lb, porque Nintendo escribió
+las dos series de cifras por separado. PIKACHU es 0,4 m / 6,0 kg en español,
+que convertido da 13,2 lb donde el cartucho estadounidense dice 13,0.
+
+### Otros idiomas
+
+Nada de `tools/es/` es específico del español. Amarillo en francés, alemán e
+italiano debería funcionar igual, y Rojo/Azul en cualquier idioma apuntando
+`--manifest` a `tools/rom_manifest.json`.
+
+Si tienes un volcado de un cartucho europeo, ejecutar la herramienta y
+publicar su informe ya es una aportación útil: dice exactamente hasta dónde
+llega el método en ese idioma sin que nadie tenga que suponerlo.
 
 ## Recomendación
 
-Camino A. Pregunta primero por el mod español que ya existe, aprovecha su
-`strings.lua`, dibuja los glifos que faltan y reparte los diálogos. Una
-traducción parcial ya sirve desde el primer día.
+Si tienes un cartucho español, impórtalo.
+
+Si no, haz el Camino A: pregunta primero por el mod español que ya existe,
+aprovecha su `strings.lua`, y usa `tools/es/charmap.py --render` contra un
+cartucho español como referencia para los glifos que faltan.
+
+Y si te apetece la ingeniería inversa, `pokeyellow-es` sigue mereciendo la
+pena, pero como lo que demuestra el resultado, no como lo que lo desbloquea.

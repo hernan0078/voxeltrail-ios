@@ -22,7 +22,7 @@ sideload: lo firman con tu propio Apple ID, en tu propio dispositivo.
 1. **Instala un sideloader.** [SideStore](https://sidestore.io) o
    [AltStore](https://altstore.io). Sigue su configuración; ambos necesitan
    emparejarse una vez con un ordenador.
-2. **Descarga** `VoxelTrail-0.3.0.ipa` desde la
+2. **Descarga** `VoxelTrail-0.4.0.ipa` desde la
    [última versión](../../releases/latest). En el teléfono, Safari lo deja en
    **Archivos → Descargas**.
 3. **Ábrelo con SideStore/AltStore** y deja que lo instale. La primera
@@ -54,7 +54,7 @@ extraídos quedan en el almacenamiento privado de la app.
 
 Todo lo de abajo va dentro del IPA. No hay que instalar nada aparte.
 
-> **Probado con Dramatic Shape v1.5.4.** Esa versión exacta es la que va
+> **Probado con Dramatic Shape v1.5.5.** Esa versión exacta es la que va
 > dentro de este IPA y con la que se ha probado todo lo de abajo. El mod se
 > actualiza a menudo y una versión más nueva puede cambiar o romper cosas de
 > aquí: el panel de ajuste en vivo, la palanca de vista y las etiquetas en
@@ -98,10 +98,18 @@ mirar hacia arriba.
 mientras andas, se gira hacia donde camina, y la camara baja cuando miras
 hacia abajo.
 
-Dos filas aparecen en este nivel: `DISTANCIA` —a que distancia queda la
-camara— y `ALTURA CAM` —a que altura va—. Las dos estan en el panel de
-ajuste en vivo, que es donde tiene sentido tocarlas: cambia `DISTANCIA` y
-mira como se aleja la camara.
+**No atraviesa las paredes**: si retrocedes a un rincon, la camara se acerca
+a tus hombros en vez de meterse en la geometria, y vuelve a salir cuando el
+rincon se despeja.
+
+**Pellizca para ajustar la distancia** (o la rueda del raton). El mismo gesto
+mueve la camara de combate y el zoom del juego plano, segun cual este activa.
+
+### Camara en los combates
+
+Durante un combate, arrastra o usa el stick derecho para mover la camara por
+el escenario, y pellizca para ajustar el objetivo. El combate se juega sobre
+el propio mapa, asi que hay una escena real que mirar.
 
 ### Ajuste en vivo: cambia el aspecto mientras lo miras
 

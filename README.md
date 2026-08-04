@@ -20,7 +20,7 @@ with your own Apple ID, on your own device.
 1. **Install a sideloader.** [SideStore](https://sidestore.io) or
    [AltStore](https://altstore.io). Follow their setup; both need a one-time
    pairing step with a computer.
-2. **Download** `VoxelTrail-0.3.0.ipa` from the
+2. **Download** `VoxelTrail-0.4.0.ipa` from the
    [latest release](../../releases/latest). On the phone, Safari puts it in
    **Files → Downloads**.
 3. **Open it in SideStore/AltStore** and let it install. First install takes a
@@ -51,7 +51,7 @@ the extracted data lives in the app's private storage.
 
 Everything below is in the IPA — nothing to install separately.
 
-> **Tested against Dramatic Shape v1.5.4.** That exact version is what ships
+> **Tested against Dramatic Shape v1.5.5.** That exact version is what ships
 > inside this IPA and what every feature below was tested on. The mod is
 > updated often, and a newer release may change or break things here — the
 > live-tuning panel, the look stick and the Spanish labels are all built on
@@ -90,13 +90,16 @@ pull-back-to-look-up.
 
 ### Third person
 
-`3D WORLD → 3RD PERSON` puts the camera behind your character. You see Red as
-you walk, he turns to face the direction he's travelling, and the camera
-swings low when you look down.
+`3D WORLD → 3RD PERSON` puts the camera on a boom behind your character. He
+turns to face where he's walking, sits slightly off-centre, and the boom
+eases rather than cuts when you step between first and third.
 
-Two rows appear on this rung: `DISTANCE` — how far back the camera sits — and
-`CAM HEIGHT` — how high it rides. Both are in the live-tuning panel, which is
-the sane place to set them: step `DISTANCE` and watch the camera pull back.
+**It won't clip through walls.** Back into a corner and the camera walks in
+toward your shoulders instead of through the geometry, then eases back out
+once the corner clears.
+
+**Pinch to set the distance** — or the mouse wheel on desktop. The same
+gesture drives the battle camera and the flat game's zoom, whichever is live.
 
 ### Live tuning — change the look while you watch it
 
@@ -107,6 +110,12 @@ panel, so you can compare settings by looking at them instead of walking back
 and forth to a menu.
 
 Turn it off with `TUNE PANEL` if you'd rather have the corner back.
+
+### Battle camera
+
+During a battle, drag or use the right stick to walk the camera around the
+arena, and pinch to work its lens. The fight is staged on the map itself, so
+there is a real scene to look around.
 
 ### Pinch to zoom
 
