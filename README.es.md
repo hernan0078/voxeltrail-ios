@@ -189,7 +189,12 @@ propio equipo.
 - **Motor** — [gen1recomp](https://github.com/bryanthaboi/gen1recomp) de BOIS
   CLUB GAMES, LLC. MIT — [`LICENSE-engine.md`](LICENSE-engine.md).
 - **Mod voxel 3D** — [Dramatic Shape](https://github.com/DramaticShape/DramaticShapeVoxelMod)
-  de DramaticShape. MIT; su licencia viaja dentro de la app.
+  de DramaticShape. Esta version incluye la **v1.5.5**, publicada bajo licencia
+  MIT — [`LICENSE-mod.md`](LICENSE-mod.md), y el aviso viaja tambien dentro de
+  la app. A partir de la v1.6.2 el autor retiro la licencia MIT y pide que no se
+  redistribuyan las versiones posteriores, asi que aqui no se incluyen. Para
+  esas, descarga el `.zip` de [sus propias releases](https://github.com/DramaticShape/DramaticShapeVoxelMod/releases)
+  e importalo desde la app con **MODS → Import mod .zip**.
 - **LÖVE** — el framework de debajo, licencia zlib.
 - **El trabajo de portado a iOS de esta versión** — MIT, los mismos términos
   que el motor.

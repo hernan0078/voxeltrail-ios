@@ -178,7 +178,12 @@ build without the 3D mod, or drop `--unsigned` to sign with your own team.
 - **Engine** — [gen1recomp](https://github.com/bryanthaboi/gen1recomp) by BOIS
   CLUB GAMES, LLC. MIT — [`LICENSE-engine.md`](LICENSE-engine.md).
 - **3D voxel mod** — [Dramatic Shape](https://github.com/DramaticShape/DramaticShapeVoxelMod)
-  by DramaticShape. MIT; its licence travels inside the app bundle.
+  by DramaticShape. This build bundles **v1.5.5**, released under MIT —
+  [`LICENSE-mod.md`](LICENSE-mod.md), and the notice travels inside the app
+  bundle too. From v1.6.2 the author dropped the MIT licence and asks that
+  later versions not be redistributed, so they are not bundled here. For those,
+  get the `.zip` from [the author's own releases](https://github.com/DramaticShape/DramaticShapeVoxelMod/releases)
+  and import it in-app with **MODS → Import mod .zip**.
 - **LÖVE** — the framework underneath, zlib licensed.
 - **iOS port work in this build** — MIT, same terms as the engine.
 
