@@ -1,12 +1,36 @@
-# Dramatic Shape Voxel Mod — licence
+# Dramatic Shape Voxel Mod — licence and permission
 
-VoxelTrail 0.4.0 bundles Dramatic Shape **v1.5.5**, which was released
-under the MIT licence reproduced below. The notice travels with the copy,
-as that licence requires.
+VoxelTrail bundles the [Dramatic Shape Voxel
+Mod](https://github.com/DramaticShape/DramaticShapeVoxelMod) by DramaticShape.
+Two different things cover that, depending on the version.
 
-The mod's own home is <https://github.com/DramaticShape/DramaticShapeVoxelMod>.
-Versions after v1.6.0 are **not** covered by this licence and are not
-redistributed here — get those from the author's own releases.
+## v1.6.2 onward — the author's permission
+
+From v1.6.2 the mod carries no licence file, and its README asks that versions
+after v1.6.0 not be redistributed without permission.
+
+Permission was asked for and given. DramaticShape, 8 August 2026:
+
+> In terms of bundling, go for it.
+
+— [DramaticShapeVoxelMod#80, comment
+5226119019](https://github.com/DramaticShape/DramaticShapeVoxelMod/pull/80#issuecomment-5226119019),
+replying to [a request](https://github.com/DramaticShape/DramaticShapeVoxelMod/pull/80#issuecomment-5223934341)
+that set out bundling the current mod in this iOS build, including the changes
+made to it here.
+
+That permission is specific to this project. **It is not a licence and it does
+not travel.** If you fork VoxelTrail, or repackage the mod out of this build,
+ask DramaticShape yourself — do not treat this file as covering you.
+
+The mod's own home is the place to get it, and it is where any support for it
+lives. Nothing here replaces it.
+
+## v1.5.5 and earlier — MIT
+
+Releases up to and including v1.6.1 shipped under the MIT licence, reproduced
+below. VoxelTrail 0.4.0 and earlier bundle v1.5.5 under these terms, and the
+notice travels with those copies as the licence requires.
 
 ```
 MIT License
@@ -31,3 +55,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## Changes made to the mod in this build
+
+Listed so the differences from an upstream install are visible rather than
+buried: readable setting names, a Spanish translation of the mod's own
+settings, a floating live-tuning panel, an on-screen look stick for the
+free-roam cameras, the Stadium ROM import routed through the iOS file picker,
+and the battle HUD's iOS compositing left on the standard path (see the
+release notes).

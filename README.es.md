@@ -22,7 +22,7 @@ sideload: lo firman con tu propio Apple ID, en tu propio dispositivo.
 1. **Instala un sideloader.** [SideStore](https://sidestore.io) o
    [AltStore](https://altstore.io). Sigue su configuración; ambos necesitan
    emparejarse una vez con un ordenador.
-2. **Descarga** `VoxelTrail-0.4.0.ipa` desde la
+2. **Descarga** `VoxelTrail-0.5.0.ipa` desde la
    [última versión](../../releases/latest). En el teléfono, Safari lo deja en
    **Archivos → Descargas**.
 3. **Ábrelo con SideStore/AltStore** y deja que lo instale. La primera
@@ -54,7 +54,7 @@ extraídos quedan en el almacenamiento privado de la app.
 
 Todo lo de abajo va dentro del IPA. No hay que instalar nada aparte.
 
-> **Probado con Dramatic Shape v1.5.5.** Esa versión exacta es la que va
+> **Probado con Dramatic Shape v1.7.2.** Esa versión exacta es la que va
 > dentro de este IPA y con la que se ha probado todo lo de abajo. El mod se
 > actualiza a menudo y una versión más nueva puede cambiar o romper cosas de
 > aquí: el panel de ajuste en vivo, la palanca de vista y las etiquetas en
@@ -120,6 +120,29 @@ detrás del panel, así que comparas ajustes mirándolos en vez de ir y volver
 del menú.
 
 Se quita con `PANEL DE CONTROL` si prefieres recuperar la esquina.
+
+### Modelos de combate de Pokémon Stadium
+
+`COMBATES 3D` puede pelear con los modelos de **Pokémon Stadium** en vez de con
+las imágenes planas de Game Boy: `STADIUM A` monta el combate sobre el mapa y
+`STADIUM B` sobre dos discos contra el cielo. Los niveles `2D-3D` hacen lo
+mismo con el arte del propio cartucho.
+
+El cartucho lo pones tú. Toca **Importar ROM de Stadium** en el panel de MODS
+del menú inicial —o `ROM STADIUM` en las opciones— y elige tu archivo de
+**Pokémon Stadium (US) 1.0**. Los modelos se crean en tu dispositivo, tardan un
+rato y se hacen una sola vez. La ROM se lee y se olvida: no se guarda.
+
+**US 1.0 en concreto.** Cada medida de los modelos está tomada de esa revisión;
+otra distinta se construye igual, pero la pantalla te avisa de que los modelos
+pueden salir mal.
+
+### Cuánto mapa se dibuja
+
+`DISTANCIA` — `AJUSTE` / `LEJOS` / `MAS LEJOS` / `MAXIMO` / `NO` — es lo
+primero que hay que tocar si el modo 3D va lento. `AJUSTE` dibuja exactamente
+el suelo que la cámara encuadra de verdad y descarta mapas enteros antes de que
+cuesten nada, que es la mayor parte de la geometría en los ángulos inclinados.
 
 ### Pellizcar para acercar
 
@@ -189,12 +212,16 @@ propio equipo.
 - **Motor** — [gen1recomp](https://github.com/bryanthaboi/gen1recomp) de BOIS
   CLUB GAMES, LLC. MIT — [`LICENSE-engine.md`](LICENSE-engine.md).
 - **Mod voxel 3D** — [Dramatic Shape](https://github.com/DramaticShape/DramaticShapeVoxelMod)
-  de DramaticShape. Esta version incluye la **v1.5.5**, publicada bajo licencia
-  MIT — [`LICENSE-mod.md`](LICENSE-mod.md), y el aviso viaja tambien dentro de
-  la app. A partir de la v1.6.2 el autor retiro la licencia MIT y pide que no se
-  redistribuyan las versiones posteriores, asi que aqui no se incluyen. Para
-  esas, descarga el `.zip` de [sus propias releases](https://github.com/DramaticShape/DramaticShapeVoxelMod/releases)
-  e importalo desde la app con **MODS → Import mod .zip**.
+  de DramaticShape. Esta version incluye la **v1.7.2**, [con permiso del
+  autor](https://github.com/DramaticShape/DramaticShapeVoxelMod/pull/80#issuecomment-5226119019).
+  Desde la v1.6.2 el mod no lleva licencia y pide que no se redistribuyan las
+  versiones posteriores sin preguntar, asi que ese permiso es lo que ampara
+  esta version: es especifico de este proyecto y no se extiende a quien lo
+  bifurque o reempaquete el mod a partir de aqui. Los detalles estan en
+  [`LICENSE-mod.md`](LICENSE-mod.md), incluidos los cambios hechos al mod aqui.
+  La casa del mod es [su repositorio](https://github.com/DramaticShape/DramaticShapeVoxelMod),
+  y ahi es donde hay que ir a por el, a por versiones nuevas y a por cualquier
+  cosa relacionada con el.
 - **LÖVE** — el framework de debajo, licencia zlib.
 - **El trabajo de portado a iOS de esta versión** — MIT, los mismos términos
   que el motor.

@@ -20,7 +20,7 @@ with your own Apple ID, on your own device.
 1. **Install a sideloader.** [SideStore](https://sidestore.io) or
    [AltStore](https://altstore.io). Follow their setup; both need a one-time
    pairing step with a computer.
-2. **Download** `VoxelTrail-0.4.0.ipa` from the
+2. **Download** `VoxelTrail-0.5.0.ipa` from the
    [latest release](../../releases/latest). On the phone, Safari puts it in
    **Files → Downloads**.
 3. **Open it in SideStore/AltStore** and let it install. First install takes a
@@ -51,7 +51,7 @@ the extracted data lives in the app's private storage.
 
 Everything below is in the IPA — nothing to install separately.
 
-> **Tested against Dramatic Shape v1.5.5.** That exact version is what ships
+> **Tested against Dramatic Shape v1.7.2.** That exact version is what ships
 > inside this IPA and what every feature below was tested on. The mod is
 > updated often, and a newer release may change or break things here — the
 > live-tuning panel, the look stick and the Spanish labels are all built on
@@ -117,6 +117,27 @@ During a battle, drag or use the right stick to walk the camera around the
 arena, and pinch to work its lens. The fight is staged on the map itself, so
 there is a real scene to look around.
 
+### Pokémon Stadium battle models
+
+`3D BATTLES` can fight with the **Pokémon Stadium** models instead of the flat
+Game Boy pictures: `STADIUM A` stages it on the map, `STADIUM B` on two discs
+against the sky. The `2D-3D` rungs do the same with the cartridge's own art.
+
+You supply the cartridge. Tap **Import Stadium ROM** in the launcher's MODS
+panel — or `STADIUM ROM` in the options menu — and pick your **Pokémon Stadium
+(US) 1.0** file. The models are built on your device into its own storage,
+which takes a while and happens once. The ROM is read and forgotten, not kept.
+
+**US 1.0 specifically.** Every model offset is measured against that revision;
+another one builds but the screen tells you the models may be wrong.
+
+### How much of the map to draw
+
+`RENDER DIST` — `FIT` / `WIDE` / `WIDER` / `WIDEST` / `OFF` — is the first
+thing to reach for if the 3D mode runs slowly. `FIT` draws exactly the ground
+the camera really frames and skips whole connected maps before they cost
+anything, which is most of the geometry at the steep angles.
+
 ### Pinch to zoom
 
 Two fingers on open screen zoom the view in and out. It drives the same `ZOOM`
@@ -178,12 +199,15 @@ build without the 3D mod, or drop `--unsigned` to sign with your own team.
 - **Engine** — [gen1recomp](https://github.com/bryanthaboi/gen1recomp) by BOIS
   CLUB GAMES, LLC. MIT — [`LICENSE-engine.md`](LICENSE-engine.md).
 - **3D voxel mod** — [Dramatic Shape](https://github.com/DramaticShape/DramaticShapeVoxelMod)
-  by DramaticShape. This build bundles **v1.5.5**, released under MIT —
-  [`LICENSE-mod.md`](LICENSE-mod.md), and the notice travels inside the app
-  bundle too. From v1.6.2 the author dropped the MIT licence and asks that
-  later versions not be redistributed, so they are not bundled here. For those,
-  get the `.zip` from [the author's own releases](https://github.com/DramaticShape/DramaticShapeVoxelMod/releases)
-  and import it in-app with **MODS → Import mod .zip**.
+  by DramaticShape. This build bundles **v1.7.2**, [with the author's
+  permission](https://github.com/DramaticShape/DramaticShapeVoxelMod/pull/80#issuecomment-5226119019).
+  From v1.6.2 the mod carries no licence and asks that later versions not be
+  redistributed without asking, so that permission is what covers this build —
+  it is specific to this project and does not extend to anyone who forks it or
+  repackages the mod out of it. Details in [`LICENSE-mod.md`](LICENSE-mod.md),
+  including the changes made to the mod here. The mod's own home is
+  [its repository](https://github.com/DramaticShape/DramaticShapeVoxelMod), and
+  that is where to go for it, for newer versions and for anything about it.
 - **LÖVE** — the framework underneath, zlib licensed.
 - **iOS port work in this build** — MIT, same terms as the engine.
 
